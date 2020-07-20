@@ -210,6 +210,11 @@ class Summary(object):
             title = '\\caption{' + title + '}'
         else:
             title = '\\caption{}'
+            
+        if self.label:
+            label = '\\label{' + self.label + '}'
+        else:
+            label = '\\label{}'
 
         simple_tables = _simple_tables(tables, settings)
         tab = [x.as_latex_tabular() for x in simple_tables]
@@ -222,7 +227,7 @@ class Summary(object):
             # create single tabular object for summary_col
             tab = re.sub(to_replace, r'\\midrule\n', tab)
 
-        out = '\\begin{table}', title, tab, '\\end{table}'
+        out = '\\begin{table}', title, label, tab, '\\end{table}'
         out = '\n'.join(out)
         return out
 
